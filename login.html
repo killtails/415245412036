@@ -107,11 +107,9 @@
   function checkLogin(event) {
     event.preventDefault();
 
-    // Replace this with your actual authentication logic
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
 
-    // For simplicity, let's assume a hardcoded username and password
     const validUsername = "YWRtaW4=";
     const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
 
@@ -119,7 +117,6 @@
     const password = atob(validPassword);
 
     if (usernameInput.value === username && passwordInput.value === password) {
-      // Redirect to provide access
       window.location.href = "enrichmentcenter.html";
     } else {
       alert("Incorrect username or password. Try again!\nPlease use your Secure Access Card to login.");
