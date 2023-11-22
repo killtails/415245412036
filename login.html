@@ -103,13 +103,13 @@
     const password = document.getElementById("password").value;
 
     // For simplicity, let's assume a hardcoded username and password
-    const validUsername = "b64YW5kaW5n";
-    const validPassword = "b64c2VjdXJlcGFzc3dvcmQ=";
+    const validUsername = "YWRtaW4=";
+    const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
 
     const username = atob(validUsername);
     const password = atob(validPassword);
 
-    if (username === validUsername && password === validPassword) {
+    if (usernameInput.value === username && passwordInput.value === password) {
       // Redirect to provide access
       window.location.href = "enrichmentcenter.html";
     } else {
