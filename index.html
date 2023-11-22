@@ -60,16 +60,88 @@
             font-style: italic;
             margin-top: 20px;
         }
+
+        /* Styles for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #1c1c1c;
+            color: #fff;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 5px;
+        }
+
+        .agree-button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .agree-button:hover {
+            background-color: #0056b3;
+        }
+
+        .cta-button:disabled {
+            background-color: #d3d3d3;
+            color: #808080;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
+<!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p>Additional information that the user must read and accept before continuing.</p>
+            <button class="agree-button" onclick="agreeAndEnableButton()">I Agree</button>
+        </div>
+    </div>
+
     <header>
         <h1>Welcome to the Aperture Laboratories and Black Mesa Research Facility Cooperative</h1>
     </header>
     <div class="container">
         <p class="intro-text">Unlock the secrets of science and technology in the heart of the New Mexico desert.</p>
-        <a href="login.html" class="cta-button">Employee Access</a>
+        <button id="employeeAccessButton" class="cta-button" onclick="redirectToLogin()" disabled>Employee Access</button>
         <p class="quote">"In the pursuit of scientific discovery, we defy the limits of human knowledge." - Dr. Gordon Freeman</p>
     </div>
+ <script>
+        // JavaScript for the modal and button state
+        window.onload = function() {
+            openModal();
+        };
+
+        function openModal() {
+            document.getElementById("myModal").style.display = "flex";
+        }
+
+        function agreeAndEnableButton() {
+            document.getElementById("myModal").style.display = "none";
+            document.getElementById("employeeAccessButton").disabled = false;
+        }
+
+        function redirectToLogin() {
+            // Redirect to the desired page after the user agrees
+            window.location.href = "login.html";
+        }
+    </script>
 </body>
 </html>
