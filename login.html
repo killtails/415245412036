@@ -131,11 +131,15 @@
     </div>
   </form>
 </div>
-<script src="config.json"></script>
 <script>
-   const substitutionKey = config.substitutionKey;
+  let substitutionKey; // Declare substitutionKey variable
   let randomCode; // Declare randomCode outside the generateCode function for later use
-
+ // Fetch the config.json file asynchronously
+  fetch('config.json')
+    .then(response => response.json())
+    .then(data => {
+      substitutionKey = data.substitutionKey;
+  
   function generateCode() {
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
@@ -217,6 +221,7 @@ const cipheredText = code;
     // Extract the first 6 characters as the decrypted code
     return decryptedCode.substring(0, 6);
   }
+      .catch(error => console.error('Error loading config.json:', error));
 </script>
 <p style="color: red;">Warning: Property of Aperture Laboratories and Black Mesa Research Facility.</p>
   
