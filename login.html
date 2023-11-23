@@ -131,8 +131,9 @@
     </div>
   </form>
 </div>
-
+<script src="config.json"></script>
 <script>
+   const substitutionKey = config.substitutionKey;
   let randomCode; // Declare randomCode outside the generateCode function for later use
 
   function generateCode() {
@@ -165,23 +166,12 @@
 
   function generatePhoneticCode(code) {
     // Simple substitution cipher key
-    const substitutionKey = {
-      '0': 'S',
-      '9': 'D',
-      '8': 'W',
-     '7': 'F',
-      '6': 'E',
-      '5': 'X',
-      '4': 'A',
-      '3': 'Q',
-      '2': 'T',
-      '1': 'C'
-    };
+const cipheredText = code;
 
     // Convert each character to its corresponding substitution
     let encryptedCode = "";
-    for (let i = 0; i < code.length; i++) {
-      const character = code[i];
+    for (let i = 0; i < cipheredText.length; i++) {
+      const character = cipheredText[i];
       encryptedCode += substitutionKey[character] || character;
     }
 
@@ -215,19 +205,7 @@
   }
 
   function decryptPhoneticCode(code) {
-    // Simple substitution cipher key (reverse of the encryption key)
-    const reverseSubstitutionKey = {
-      'S': '0',
-      'D': '9',
-      'W': '8',
-      'F': '7',
-      'E': '6',
-      'X': '5',
-      'A': '4',
-      'Q': '3',
-      'T': '2',
-      'C': '1'
-    };
+    const reverseSubstitutionKey = config.reverseSubstitutionKey;
 
     // Convert each character to its corresponding reverse substitution
     let decryptedCode = "";
