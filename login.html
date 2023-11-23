@@ -132,20 +132,14 @@
   </form>
 </div>
 <script>
-  let substitutionKey; // Declare substitutionKey variable
   let randomCode; // Declare randomCode outside the generateCode function for later use
- // Fetch the config.json file asynchronously
-  fetch('config.json')
-    .then(response => response.json())
-    .then(data => {
-      substitutionKey = data.substitutionKey;
-  
+
   function generateCode() {
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
 
-    const validUsername = "MTIyNzYwNQ==";
-    const validPassword = "MTExMDA4MzI1";
+    const validUsername = "YWRtaW4=";
+    const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
 
     const username = atob(validUsername);
     const password = atob(validPassword);
@@ -165,17 +159,28 @@
     codeInput.value = "";
 
     // Display a message to the user
-    alert("A new 6-digit code has been generated. Use your Phonetic Key for reference.");
+    alert("A new 6-digit code has been generated. Use the Phonetic Code for reference.");
   }
 
   function generatePhoneticCode(code) {
     // Simple substitution cipher key
-const cipheredText = code;
+    const substitutionKey = {
+      '0': 'S',
+      '9': 'D',
+      '8': 'W',
+      '7': 'F',
+      '6': 'E',
+      '5': 'X',
+      '4': 'A',
+      '3': 'Q',
+      '2': 'T',
+      '1': 'C'
+    };
 
     // Convert each character to its corresponding substitution
     let encryptedCode = "";
-    for (let i = 0; i < cipheredText.length; i++) {
-      const character = cipheredText[i];
+    for (let i = 0; i < code.length; i++) {
+      const character = code[i];
       encryptedCode += substitutionKey[character] || character;
     }
 
@@ -189,8 +194,8 @@ const cipheredText = code;
     const passwordInput = document.getElementById("password");
     const codeInput = document.getElementById("code");
 
-    const validUsername = "MTIyNzYwNQ==";
-    const validPassword = "MTExMDA4MzI1";
+    const validUsername = "YWRtaW4=";
+    const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
 
     const username = atob(validUsername);
     const password = atob(validPassword);
@@ -209,7 +214,19 @@ const cipheredText = code;
   }
 
   function decryptPhoneticCode(code) {
-    const reverseSubstitutionKey = config.reverseSubstitutionKey;
+    // Simple substitution cipher key (reverse of the encryption key)
+    const reverseSubstitutionKey = {
+      'S': '0',
+      'D': '9',
+      'W': '8',
+      'F': '7',
+      'E': '6',
+      'X': '5',
+      'A': '4',
+      'Q': '3',
+      'T': '2',
+      'C': '1'
+    };
 
     // Convert each character to its corresponding reverse substitution
     let decryptedCode = "";
@@ -221,8 +238,8 @@ const cipheredText = code;
     // Extract the first 6 characters as the decrypted code
     return decryptedCode.substring(0, 6);
   }
-      .catch(error => console.error('Error loading config.json:', error));
 </script>
+
 <p style="color: red;">Warning: Property of Aperture Laboratories and Black Mesa Research Facility.</p>
   
 </body>
