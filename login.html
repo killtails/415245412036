@@ -78,6 +78,20 @@
       background-color: #ddd; /* Light gray button on hover */
       color: #000; /* Black text on hover */
     }
+    .form-group button.generate-code {
+      width: 100%;
+      padding: 10px;
+      background-color: #666; /* Dark gray button */
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .form-group button.generate-code:hover {
+      background-color: #888; /* Light gray button on hover */
+    }
   </style>
 </head>
 <body>
@@ -97,6 +111,16 @@
       <input type="password" id="password" name="password" required>
     </div>
 
+    <!-- "Generate Code" button -->
+    <div class="form-group">
+      <button type="button" class="generate-code" onclick="generateCode()">Generate Code</button>
+    </div>
+
+    <div class="form-group">
+      <label for="code">6-Digit Code:</label>
+      <input type="text" id="code" name="code" pattern="\d{6}" title="Please enter a 6-digit code." required>
+    </div>
+
     <div class="form-group">
       <button type="submit">Login</button>
     </div>
@@ -104,11 +128,84 @@
 </div>
 
 <script>
+  // Move the generateCode function outside of the generateCode function
+  function generateCode(username, password) {
+    // Simple substitution cipher key
+    const substitutionKey = {
+      '0': 'S',
+      '9': 'D',
+      '8': 'W',
+      '7': 'F',
+      '6': 'E',
+      '5': 'X',
+      '4': 'A',
+      '3': 'Q',
+      '2': 'T',
+      '1': 'C'
+    };
+
+    // Concatenate username and password
+    const cipheredText = username + password;
+
+    // Convert each digit to its corresponding substitution
+    let generatedCode = "";
+    for (let i = 0; i < cipheredText.length; i++) {
+      const digit = cipheredText[i];
+      generatedCode += substitutionKey[digit] || digit;
+    }
+
+    // Return the first 6 characters as the 6-digit code
+    return generatedCode.substring(0, 6);
+  }
+
+  function generatePhoneticCode(username, password) {
+    // Implement your logic to generate a phonetic code
+    // For simplicity, let's just concatenate username and password
+    return username + password;
+  }
+
+  function generateCode() {
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+
+    const validUsername = "YWRtaW4=";
+    const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
+
+    const username = atob(validUsername);
+    const password = atob(validPassword);
+
+    // Generate 6-digit code using substitution cipher
+    const generatedCode = generateCode(username, password);
+
+    // Display the generated code in the code input field
+    const codeInput = document.getElementById("code");
+    codeInput.value = generatedCode;
+
+    // Display a custom notification with the phonetic code
+    showNotification("Phonetic Code", generatePhoneticCode(username, password));
+  }
+
+  function showNotification(title, message) {
+    // Create a custom notification (you can use a library for more advanced notifications)
+    const notification = document.createElement("div");
+    notification.classList.add("notification");
+    notification.innerHTML = `<h4>${title}</h4><p>${message}</p>`;
+    
+    // Add the notification to the body
+    document.body.appendChild(notification);
+
+    // Remove the notification after a few seconds
+    setTimeout(() => {
+      notification.remove();
+    }, 5000); // 5000 milliseconds (adjust as needed)
+  }
+
   function checkLogin(event) {
     event.preventDefault();
 
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
+    const codeInput = document.getElementById("code");
 
     const validUsername = "YWRtaW4=";
     const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
