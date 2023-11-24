@@ -1,4 +1,4 @@
-1.1<!DOCTYPE html>
+1.0<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -133,15 +133,6 @@
 </div>
 <script>
   let randomCode; // Declare randomCode outside the generateCode function for later use
-  let substitutionKey; // Declare substitutionKey variable
-
-  // Fetch the config.json file asynchronously
-  fetch('config.json')
-    .then(response => response.json())
-    .then(data => {
-      substitutionKey = data.substitutionKey;
-    })
-    .catch(error => console.error('Error loading config.json:', error));
 
   function generateCode() {
     const usernameInput = document.getElementById("username");
