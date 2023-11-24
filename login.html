@@ -134,6 +134,57 @@
 <script>
   let randomCode; // Declare randomCode outside the generateCode function for later use
 
+  function generatePhoneticCode(code) {
+    // Simple substitution cipher key
+    const substitutionKey = {
+      '0': 'S',
+      '9': 'D',
+      '8': 'W',
+      '7': 'F',
+      '6': 'E',
+      '5': 'X',
+      '4': 'A',
+      '3': 'Q',
+      '2': 'T',
+      '1': 'C'
+    };
+
+    // Convert each character to its corresponding substitution
+    let encryptedCode = "";
+    for (let i = 0; i < code.length; i++) {
+      const character = code[i];
+      encryptedCode += substitutionKey[character] || character;
+    }
+
+    return encryptedCode;
+  }
+
+  function decryptPhoneticCode(code) {
+    // Simple substitution cipher key (reverse of the encryption key)
+    const reverseSubstitutionKey = {
+      'S': '0',
+      'D': '9',
+      'W': '8',
+      'F': '7',
+      'E': '6',
+      'X': '5',
+      'A': '4',
+      'Q': '3',
+      'T': '2',
+      'C': '1'
+    };
+
+    // Convert each character to its corresponding reverse substitution
+    let decryptedCode = "";
+    for (let i = 0; i < code.length; i++) {
+      const character = code[i];
+      decryptedCode += reverseSubstitutionKey[character] || character;
+    }
+
+    // Extract the first 6 characters as the decrypted code
+    return decryptedCode.substring(0, 6);
+  }
+
   function generateCode() {
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
@@ -167,20 +218,6 @@
     alert("A new 6-digit code has been generated. Use the displayed Phonetic Code for reference.");
   }
 
-  function generatePhoneticCode(code) {
-    // Simple substitution cipher key
-    const cipheredText = code;
-
-    // Convert each character to its corresponding substitution
-    let encryptedCode = "";
-    for (let i = 0; i < cipheredText.length; i++) {
-      const character = cipheredText[i];
-      encryptedCode += substitutionKey[character] || character;
-    }
-
-    return encryptedCode;
-  }
-
   function checkLogin(event) {
     event.preventDefault();
 
@@ -205,32 +242,6 @@
     } else {
       alert("Incorrect code. Try again!\nPlease use your Secure Access Card to login.");
     }
-  }
-
-  function decryptPhoneticCode(code) {
-    // Simple substitution cipher key (reverse of the encryption key)
-    const reverseSubstitutionKey = {
-      'S': '0',
-      'D': '9',
-      'W': '8',
-      'F': '7',
-      'E': '6',
-      'X': '5',
-      'A': '4',
-      'Q': '3',
-      'T': '2',
-      'C': '1'
-    };
-
-    // Convert each character to its corresponding reverse substitution
-    let decryptedCode = "";
-    for (let i = 0; i < code.length; i++) {
-      const character = code[i];
-      decryptedCode += reverseSubstitutionKey[character] || character;
-    }
-
-    // Extract the first 6 characters as the decrypted code
-    return decryptedCode.substring(0, 6);
   }
 </script>
 
