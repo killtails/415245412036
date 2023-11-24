@@ -133,10 +133,24 @@
 </div>
 <script>
   let randomCode; // Declare randomCode outside the generateCode function for later use
+  let substitutionKey; // Declare substitutionKey variable
+
+  // Fetch the config.json file asynchronously
+  fetch('config.json')
+    .then(response => response.json())
+    .then(data => {
+      substitutionKey = data.substitutionKey;
+    })
+    .catch(error => console.error('Error loading config.json:', error));
 
   function generateCode() {
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
+
+    if (!usernameInput.value || !passwordInput.value) {
+      alert("Please fill out both username and password fields.");
+      return;
+    }
 
     const validUsername = "YWRtaW4=";
     const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
@@ -159,28 +173,17 @@
     codeInput.value = "";
 
     // Display a message to the user
-    alert("A new 6-digit code has been generated. Use the Phonetic Code for reference.");
+    alert("A new 6-digit code has been generated. Use the displayed Phonetic Code for reference.");
   }
 
   function generatePhoneticCode(code) {
     // Simple substitution cipher key
-    const substitutionKey = {
-      '0': 'S',
-      '9': 'D',
-      '8': 'W',
-      '7': 'F',
-      '6': 'E',
-      '5': 'X',
-      '4': 'A',
-      '3': 'Q',
-      '2': 'T',
-      '1': 'C'
-    };
+    const cipheredText = code;
 
     // Convert each character to its corresponding substitution
     let encryptedCode = "";
-    for (let i = 0; i < code.length; i++) {
-      const character = code[i];
+    for (let i = 0; i < cipheredText.length; i++) {
+      const character = cipheredText[i];
       encryptedCode += substitutionKey[character] || character;
     }
 
