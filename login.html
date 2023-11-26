@@ -1,4 +1,4 @@
-1.0<!DOCTYPE html>
+1.1<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -133,27 +133,23 @@
 </div>
 <script>
   let randomCode; // Declare randomCode outside the generateCode function for later use
+  let sk; // Declare sk outsife function for later use
+  
+  // Function to load sk from external site
+  async function loadsk() {
+      const response = await fetch('415245412036/config.json')
+      sk = await response.json();
+  }
+  
+  loadsk();
 
   function generatePhoneticCode(code) {
     // Simple substitution cipher key
-    const substitutionKey = {
-      '0': 'S',
-      '9': 'D',
-      '8': 'W',
-      '7': 'F',
-      '6': 'E',
-      '5': 'X',
-      '4': 'A',
-      '3': 'Q',
-      '2': 'T',
-      '1': 'C'
-    };
-
     // Convert each character to its corresponding substitution
     let encryptedCode = "";
     for (let i = 0; i < code.length; i++) {
       const character = code[i];
-      encryptedCode += substitutionKey[character] || character;
+      encryptedCode += sk[character] || character;
     }
 
     return encryptedCode;
@@ -161,24 +157,15 @@
 
   function decryptPhoneticCode(code) {
     // Simple substitution cipher key (reverse of the encryption key)
-    const reverseSubstitutionKey = {
-      'S': '0',
-      'D': '9',
-      'W': '8',
-      'F': '7',
-      'E': '6',
-      'X': '5',
-      'A': '4',
-      'Q': '3',
-      'T': '2',
-      'C': '1'
-    };
+    const reversesk = Object.fromEntries(
+        Object.entries(sk).map(([k, v]) => [v, k])
+    );
 
     // Convert each character to its corresponding reverse substitution
     let decryptedCode = "";
     for (let i = 0; i < code.length; i++) {
       const character = code[i];
-      decryptedCode += reverseSubstitutionKey[character] || character;
+      decryptedCode += reversesk[character] || character;
     }
 
     // Extract the first 6 characters as the decrypted code
