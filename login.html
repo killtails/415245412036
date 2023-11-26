@@ -1,4 +1,4 @@
-1.1<!DOCTYPE html>
+1.2<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -147,7 +147,7 @@
   async function loadcd() {
     const response = await fetch('cd.json');
     const config = await response.json();
-    creds = cd.creds;
+    creds = config.creds;
   }
 
   loadcreds();
@@ -221,8 +221,8 @@
     const passwordInput = document.getElementById("password");
     const codeInput = document.getElementById("code");
 
-    const VU = cd[0].username;
-    const VP = cd[0].password;
+    const VU = creds[0].username;
+    const VP = creds[0].password;
 
     const username = atob(VU);
     const password = atob(VP);
