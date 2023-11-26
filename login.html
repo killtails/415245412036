@@ -140,6 +140,7 @@
   async function loadsk() {
       const response = await fetch('keys.json');
       sk = await response.json();
+      console.log('sk loaded:', sk)
   }
   
   await loadsk();
@@ -147,6 +148,7 @@
   async function loadcreds() {
     const response = await fetch('cd.json');
     creds = await response.json();
+    console.log('creds loaded:', creds)
   }
 
   await loadcreds();
