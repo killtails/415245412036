@@ -1,4 +1,4 @@
-1.4<!DOCTYPE html>
+1.2<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -132,30 +132,16 @@
   </form>
 </div>
 <script>
-  (async function () {
-    let randomCode; // Declare randomCode outside the generateCode function for later use
-    let sk; // Declare substitution keys outside function for later use
-    let creds; // Declare creds outside function for later use
-    
-    // Function to load sk from an external site
-    async function loadsk() {
-      const response = await fetch('keys.json');
+  let randomCode; // Declare randomCode outside the generateCode function for later use
+  let sk; // Declare sk outsife function for later use
+  
+  // Function to load sk from external site
+  async function loadsk() {
+      const response = await fetch('config.json')
       sk = await response.json();
-      console.log('Substitution keys loaded:', sk);
-    }
-    
-    // Ensure that loadsk completes before moving forward
-    await loadsk();
-
-    // Function to load creds from an external site
-    async function loadcreds() {
-      const response = await fetch('cd.json');
-      creds = await response.json();
-      console.log('Credentials loaded:', creds);
-    }
-
-    // Ensure that loadcreds completes before moving forward
-    await loadcreds();
+  }
+  
+  loadsk();
 
   function generatePhoneticCode(code) {
     // Simple substitution cipher key
@@ -191,15 +177,15 @@
     const passwordInput = document.getElementById("password");
 
     if (!usernameInput.value || !passwordInput.value) {
-      alert("Please fill out both username and site fields.");
+      alert("Please fill out both username and password fields.");
       return;
     }
 
-    const VU = creds[0].username;
-    const VP = creds[0].password;
+    const validUsername = "YWRtaW4=";
+    const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
 
-    const username = atob(VU);
-    const password = atob(VP);
+    const username = atob(validUsername);
+    const password = atob(validPassword);
 
     // Generate a random 6-digit code
     randomCode = Math.floor(100000 + Math.random() * 900000);
@@ -226,11 +212,11 @@
     const passwordInput = document.getElementById("password");
     const codeInput = document.getElementById("code");
 
-    const VU = creds[0].username;
-    const VP = creds[0].password;
+    const validUsername = "YWRtaW4=";
+    const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
 
-    const username = atob(VU);
-    const password = atob(VP);
+    const username = atob(validUsername);
+    const password = atob(validPassword);
 
     const enteredCode = codeInput.value;
 
@@ -243,7 +229,7 @@
     } else {
       alert("Incorrect code. Try again!\nPlease use your Secure Access Card to login.");
     }
- })();
+  }
 </script>
 
 <p style="color: red;">Warning: Property of Aperture Laboratories and Black Mesa Research Facility.</p>
