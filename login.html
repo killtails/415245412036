@@ -1,4 +1,4 @@
-1.3<!DOCTYPE html>
+1.0<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -142,14 +142,14 @@
       sk = await response.json();
   }
   
-  loadsk();
+  await loadsk();
 
   async function loadcreds() {
     const response = await fetch('cd.json');
     creds = await response.json();
   }
 
-  loadcreds();
+  await loadcreds();
 
   function generatePhoneticCode(code) {
     // Simple substitution cipher key
