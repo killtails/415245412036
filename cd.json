@@ -1,0 +1,8 @@
+{
+  "credentials": [
+    { "username": "YWRtaW4=", "password": "c2VjdXJlcGFzc3dvcmQ=" },
+    { "username": "us1", "password": "usp1" },
+    { "username": "usp2", "password": "usp2" }
+    // Add more sets of username/password pairs as needed
+  ]
+}
