@@ -1,4 +1,4 @@
-1.2<!DOCTYPE html>
+1.3<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -138,11 +138,16 @@
   
   // Function to load sk from external site
   async function loadsk() {
-      const response = await fetch('config.json')
+      const response = await fetch('keys.json')
       sk = await response.json();
   }
   
   loadsk();
+
+  async function loadcd() {
+    const response = await fetch('cd.json');
+    const config = await response.json();
+    cd = 
 
   function generatePhoneticCode(code) {
     // Simple substitution cipher key
