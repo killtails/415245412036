@@ -147,7 +147,10 @@
   async function loadcd() {
     const response = await fetch('cd.json');
     const config = await response.json();
-    cd = 
+    cd = cd.cd;
+  }
+
+  loadcd();
 
   function generatePhoneticCode(code) {
     // Simple substitution cipher key
@@ -187,11 +190,11 @@
       return;
     }
 
-    const User = "YWRtaW4=";
-    const Password = "c2VjdXJlcGFzc3dvcmQ=";
+    const User = cd[0].username;
+    const Password = cd[0].password;
 
-    const username = atob(validUsername);
-    const password = atob(validPassword);
+    const username = atob(User);
+    const password = atob(Password);
 
     // Generate a random 6-digit code
     randomCode = Math.floor(100000 + Math.random() * 900000);
@@ -218,11 +221,11 @@
     const passwordInput = document.getElementById("password");
     const codeInput = document.getElementById("code");
 
-    const validUsername = "YWRtaW4=";
-    const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
+    const User = cd[0].username;
+    const Password = cd[0].password;
 
-    const username = atob(validUsername);
-    const password = atob(validPassword);
+    const username = atob(User);
+    const password = atob(Password);
 
     const enteredCode = codeInput.value;
 
