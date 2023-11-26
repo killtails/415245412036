@@ -144,7 +144,7 @@
   
   loadsk();
 
-  async function loadcd() {
+  async function loadcreds() {
     const response = await fetch('cd.json');
     const config = await response.json();
     creds = config.creds;
