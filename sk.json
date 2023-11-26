@@ -1,6 +1,6 @@
 // config.json
 {
-  "substitutionKey": {
+  "sk": {
     "0": "S",
     "9": "D",
     "8": "W",
