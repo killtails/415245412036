@@ -44,11 +44,82 @@
 
   gtag('config', 'G-D6H4VNHEGY');
 </script>
+<title>File Server</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #191919;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #e17705;
+        border-radius: 2px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+    }
+
+    h1 {
+        color: #333;
+        margin-bottom: -20px;
+    }
+
+    h4 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .root,
+    .folder,
+    .file {
+        display: block;
+        margin: 10px 0;
+        text-decoration: none;
+        color: #191919;
+    }
+    .root {
+        padding-left: 20px;
+    }
+
+    .folder {
+        padding-left: 40px;
+    }
+
+    .root:hover,
+    .folder:hover,
+    .file:hover {
+        text-decoration: underline;
+    }
+
+    .file {
+        padding-left: 80px;
+    }
+    
+</style>
+</head>
+
 <body>
-    <div class="container">
-        <h1>Under Construction</h1>
-        <p>You sucessfully solved the challenges! <br> However this page is under construction. Please check back later!</p>
-    </div>
+<div class="container">
+    <h1>Cyber Resources<br>File Server</h1>
+    <h4>Note: Under constant developement</h4>
+
+    <a class="root" href="#">/</a>
+    <a class="folder" href="#">/home</a>
+    <a class="folder" href="#">/home/user</a>
+    <a class="file" href="#">/home/user/file1.txt</a>
+    <a class="file" href="#">/home/user/file2.pdf</a>
+    <a class="folder" href="#">/etc</a>
+    <a class="file" href="#">/etc/config.conf</a>
+    <!-- Add more folders and files as needed -->
+</div>
 </body>
 </html>
-
