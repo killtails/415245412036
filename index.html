@@ -2,23 +2,23 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D6H4VNHEGY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D6H4VNHEGY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-  gtag('config', 'G-D6H4VNHEGY');
-</script>
-<body>
+        gtag('config', 'G-D6H4VNHEGY');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black Mesa Research Facility</title>
     <style>
         @font-face {
-        font-family: 'F25_Bank_Printer';
-        src: url('path/to/ocr-a.ttf') format('truetype');
-    }
+            font-family: 'F25_Bank_Printer';
+            src: url('https://raw.githubusercontent.com/killtails/415245412036/main/Fonts/f25_bank_printer/F25_Bank_Printer.ttf') format('truetype');
+        }
+
         body {
             font-family: 'F25_Bank_Printer';
             background-color: #000000;
@@ -27,39 +27,51 @@
             margin: 0;
             padding: 0;
         }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 2px solid #fff; /* Border around the container */
+            border-radius: 0px; /* Rounded corners for the container */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Box shadow for the container */
+        }
+
         header {
             background-color: #1c1c1c;
             padding: 20px;
         }
+
         header h1 {
             font-family: 'F25_Bank_Printer';
-            font-size: 36px;
+            font-size: 25px;
             margin: 0;
+            font-weight: lighter;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+
         .intro-text {
             font-size: 18px;
             margin-bottom: 20px;
         }
+
         .cta-button {
             display: inline-block;
-            background-color: #007BFF;
+            background-color: #000000;
             color: #fff;
-            padding: 15px 30px;
+            padding: 15px 15px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: Regular;
             border: none;
-            border-radius: 5px;
+            border-radius: 0px;
             cursor: pointer;
             transition: background-color 0.3s ease-in-out;
+            font-family: 'F25_Bank_Printer';
         }
+
         .cta-button:hover {
-            background-color: #0056b3;
+            background-color: #ff9900;
         }
+
         .quote {
             font-style: italic;
             margin-top: 20px;
@@ -84,23 +96,24 @@
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
-            border-radius: 5px;
+            border-radius: 0px;
         }
 
         .agree-button {
-            background-color: #007BFF;
+            background-color: #000000;
             color: #fff;
-            padding: 10px 20px;
+            padding: 10px 10px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: Regular;
             border: none;
-            border-radius: 5px;
+            border-radius: 0px;
             cursor: pointer;
             transition: background-color 0.3s ease-in-out;
+            font-family: 'F25_Bank_Printer';
         }
 
         .agree-button:hover {
-            background-color: #0056b3;
+            background-color: #ff9900;
         }
 
         .cta-button:disabled {
@@ -111,24 +124,27 @@
     </style>
 </head>
 <body>
-<!-- Modal -->
+    <!-- Modal -->
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <p>This website is a fictional extension of KDR LABS and is not owned or operated by any government entity.<br>
+            <p>OFFICIAL NOTICE<br><br>This website is a fictional extension of KDR LABS and is not owned or operated by any government entity.<br>
             To access this website you must be in possession of a <br> LEVEL 2 SECURE ACCESS BUSINESS CARD.</p>
             <button class="agree-button" onclick="agreeAndEnableButton()">I Understand</button>
         </div>
     </div>
 
-    <header>
-        <h1>Welcome to the Aperture Laboratories and Black Mesa Research Facility Cooperative</h1>
-    </header>
     <div class="container">
-        <p class="intro-text">Unlock the secrets of science and technology in the heart of the New Mexico desert.</p>
-        <button id="employeeAccessButton" class="cta-button" onclick="redirectToLogin()" disabled>Employee Access</button>
-        <p class="quote">"In the pursuit of scientific discovery, we defy the limits of human knowledge." - Dr. Gordon Freeman</p>
+        <header>
+            <h1>Welcome to the Aperture Laboratories and Black Mesa Research Facility Cooperative</h1>
+        </header>
+        <div class="container">
+            <p class="intro-text">Unlock the secrets of science and technology in the heart of the New Mexico desert.</p>
+            <button id="employeeAccessButton" class="cta-button" onclick="redirectToLogin()" disabled>Employee Access</button>
+            <p class="quote">"In the pursuit of scientific discovery, we defy the limits of human knowledge." <br>- Dr. Gordon Freeman</p>
+        </div>
     </div>
- <script>
+
+    <script>
         // JavaScript for the modal and button state
         window.onload = function() {
             openModal();
