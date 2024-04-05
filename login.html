@@ -162,31 +162,17 @@
         return decryptedCode.substring(0, 6);
     }
 
-async function loadCredentials() {
-    try {
-        const response = await fetch('cd.json');
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("Error loading credentials:", error);
-        throw error; // Rethrow the error to handle it in the calling function
-    }
-}
+    function generateCode() {
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
 
-async function generateCode() {
-    const usernameInput = document.getElementById("username");
-    const passwordInput = document.getElementById("password");
-    const codeInput = document.getElementById("code");
+        if (!usernameInput.value || !passwordInput.value) {
+            alert("Please fill out both username and password fields.");
+            return;
+        }
 
-    if (!usernameInput.value || !passwordInput.value) {
-        alert("Please fill out both username and password fields.");
-        return;
-    }
-
-    try {
-        const credentials = await loadCredentials();
-        const validUsername = credentials.username;
-        const validPassword = credentials.password;
+        const validUsername = "MTIyNzYwNQ";
+        const validPassword = "MTExMDA4MzI1";
 
         const username = atob(validUsername);
         const password = atob(validPassword);
@@ -201,28 +187,21 @@ async function generateCode() {
         codeInput.value = "";
 
         alert("A new 6-digit code has been generated. Use the displayed Phonetic Code for reference.");
-    } catch (error) {
-        console.error("Error loading credentials:", error);
-        alert("An error occurred while loading credentials. Please try again later.");
     }
-}
 
-    async function checkLogin(event) {
+    function checkLogin(event) {
         event.preventDefault();
 
         const usernameInput = document.getElementById("username");
         const passwordInput = document.getElementById("password");
         const codeInput = document.getElementById("code");
 
-        const credentials = await loadCredentials();
-        const validUsername = credentials.username;
-        const validPassword = credentials.password;
+        const validUsername = "YWRtaW4=";
+        const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
 
         const username = atob(validUsername);
         const password = atob(validPassword);
 
-        const enteredUsername = usernameInput.value;
-        const enteredPassword = passwordInput.value;
         const enteredCode = codeInput.value;
         const decryptedCode = decryptPhoneticCode(enteredCode);
 

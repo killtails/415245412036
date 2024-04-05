@@ -131,51 +131,67 @@
 </div>
 
 <script>
-    let randomCode;
-    let sk;
-  
-    async function loadsk() {
-        const response = await fetch('keys.json')
+let randomCode;
+let sk;
+
+async function loadsk() {
+    try {
+        const response = await fetch('keys.json');
         sk = await response.json();
+    } catch (error) {
+        console.error("Error loading substitution cipher key:", error);
+        throw error;
     }
-  
-    loadsk();
+}
 
-    function generatePhoneticCode(code) {
-        let encryptedCode = "";
-        for (let i = 0; i < code.length; i++) {
-            const character = code[i];
-            encryptedCode += sk[character] || character;
-        }
-        return encryptedCode;
+async function loadCredentials() {
+    try {
+        const response = await fetch('cd.json');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error loading credentials:", error);
+        throw error;
+    }
+}
+
+function generatePhoneticCode(code) {
+    let encryptedCode = "";
+    for (let i = 0; i < code.length; i++) {
+        const character = code[i];
+        encryptedCode += sk[character] || character;
+    }
+    return encryptedCode;
+}
+
+function decryptPhoneticCode(code) {
+    const reversesk = Object.fromEntries(
+        Object.entries(sk).map(([k, v]) => [v, k])
+    );
+    let decryptedCode = "";
+    for (let i = 0; i < code.length; i++) {
+        const character = code[i];
+        decryptedCode += reversesk[character] || character;
+    }
+    return decryptedCode.substring(0, 6);
+}
+
+async function generateCode() {
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+
+    if (!usernameInput.value || !passwordInput.value) {
+        alert("Please fill out both username and password fields.");
+        return;
     }
 
-    function decryptPhoneticCode(code) {
-        const reversesk = Object.fromEntries(
-            Object.entries(sk).map(([k, v]) => [v, k])
-        );
-        let decryptedCode = "";
-        for (let i = 0; i < code.length; i++) {
-            const character = code[i];
-            decryptedCode += reversesk[character] || character;
-        }
-        return decryptedCode.substring(0, 6);
-    }
+    try {
+        const credentials = await loadCredentials();
+        const validUsername = credentials.username;
+        const validPassword = credentials.password;
 
-    function generateCode() {
-        const usernameInput = document.getElementById("username");
-        const passwordInput = document.getElementById("password");
-
-        if (!usernameInput.value || !passwordInput.value) {
-            alert("Please fill out both username and password fields.");
-            return;
-        }
-
-        const validUsername = "YWRtaW4=";
-        const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
-
-        const username = atob(validUsername);
-        const password = atob(validPassword);
+        const username = (validUsername);
+        const password = (validPassword);
 
         randomCode = Math.floor(100000 + Math.random() * 900000);
         const encryptedCode = generatePhoneticCode(randomCode.toString());
@@ -187,21 +203,27 @@
         codeInput.value = "";
 
         alert("A new 6-digit code has been generated. Use the displayed Phonetic Code for reference.");
+    } catch (error) {
+        console.error("Error generating code:", error);
+        alert("An error occurred while generating the code. Please try again later.");
     }
+}
 
-    function checkLogin(event) {
-        event.preventDefault();
+async function checkLogin(event) {
+    event.preventDefault();
 
-        const usernameInput = document.getElementById("username");
-        const passwordInput = document.getElementById("password");
-        const codeInput = document.getElementById("code");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const codeInput = document.getElementById("code");
 
-        const validUsername = "YWRtaW4=";
-        const validPassword = "c2VjdXJlcGFzc3dvcmQ=";
+    try {
+        await loadsk();
+        const credentials = await loadCredentials();
+        const validUsername = credentials.username;
+        const validPassword = credentials.password;
 
-        const username = atob(validUsername);
-        const password = atob(validPassword);
-
+        const enteredUsername = usernameInput.value;
+        const enteredPassword = passwordInput.value;
         const enteredCode = codeInput.value;
         const decryptedCode = decryptPhoneticCode(enteredCode);
 
@@ -210,7 +232,12 @@
         } else {
             alert("Incorrect code. Try again!\nPlease use your Secure Access Card to login.");
         }
+    } catch (error) {
+        console.error("Error checking login:", error);
+        alert("An error occurred while checking login credentials. Please try again later.");
     }
+}
+
 </script>
 
 
